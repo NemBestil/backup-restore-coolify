@@ -128,6 +128,18 @@ The restore script expects an extracted backup directory with a `coolify/` subdi
 sudo bash ./restore-coolify.sh /path/to/backup_20260401_120000
 ```
 
+### Prepare the Target Server
+
+For best results, restore onto a fresh server that does not already have Docker installed. If the target server already has Docker, make sure it is completely clean before running the restore so old containers, images, networks, and volumes do not conflict with the restored Coolify environment.
+
+The following commands are destructive and will remove existing Docker workloads and data:
+
+```bash
+sudo docker ps -aq | xargs -r sudo docker stop
+sudo docker system prune -af --volumes
+sudo docker volume ls -q | xargs -r sudo docker volume rm
+```
+
 ### Restore Notes
 
 - The script is interactive and asks for confirmation before it proceeds.
