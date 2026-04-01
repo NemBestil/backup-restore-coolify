@@ -147,6 +147,9 @@ sudo docker volume ls -q | xargs -r sudo docker volume rm
 - It restores the saved Coolify version automatically.
 - After restore, let Coolify manage the application containers.
 - Start services only from the Coolify web UI or the Coolify API, not from the shell with `docker`, `docker compose`, or similar commands.
+- Projects that build containers from source, such as Dockerfile-, Docker Compose-, or Nixpacks-based projects pulling from GitHub, will be rebuilt on the new instance the first time you start them after migration.
+- Right after restore, Coolify may initially show projects as running because that was their recorded state when the backup was created.
+- Give Coolify a few minutes to refresh status checks. It should detect that those projects are actually down and mark them accordingly before you start them again from the web UI or API.
 - If the server IP changes, update DNS after the restore.
 
 ## Transferring a Backup
